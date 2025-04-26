@@ -1,3 +1,5 @@
+# Python_Modul_Week_2
+### Question1: Student Grades Processing
 ogrenciler = {
     'Ahmet Yılmaz': [85, 90, 78], 
     'Mehmet Demir': [82, 86, 76], 
@@ -46,3 +48,48 @@ for ogrenci in ogrenciler:
     if ort <70:
         dusuk.add(ogrenci)
 print(dusuk)
+
+
+
+
+
+### Question 3: Customer Management System
+def menu():
+    print("""
+        1) Yemi musteri eklemek icin "1" e basiniz.
+        2) Musteri bilgilerini duzenlemek icin "2" e basiniz.
+        3) Musteri bil;gilerini silmek icin "3" e basiniz.
+        4) Musterileri listelemek icin "4" e basiniz.
+        4) Cikmak icin "q" e basiniz.
+        """) 
+musteriler={}
+while True:
+    menu()
+    secim = input("Seciminizi yapiniz: ")
+    if secim in  ["1","2","3","4","q"]:
+        if secim=="q":
+           break
+        if secim=="1": # musteri Ekleme
+           ide = input("Musteri idesini giriniz:")          
+           ad= input("Musteri adini giriniz:")
+           soyad= input("Musteri soyadini giriniz:")
+           e_posta = input("Musteri mail adresini giriniz:")
+           telefon = input("Musteri telefon numarasini giriniz:")
+           musteriler[ide]=[ad,soyad,e_posta,telefon]
+           print(musteriler)
+        if secim=="2":
+           ide = input("Musteri idesini giriniz:")    
+           if ide in musteriler:
+                ad = input("Yeni ad (degisiklik olmayacaksa enter'a basiniz) ")
+                soyad = input("Yeni soyad (degisiklik olmayacaksa enter'a basiniz) : ")
+                e_posta = input("Yeni e-posta (degisiklik olmayacaksa enter'a basiniz)  : ")
+                telefon = input("Yeni telefon (degisiklik olmayacaksa enter'a basiniz) : ")
+                if ad:
+                    musteriler[ide][0]=ad
+                if soyad:
+                    musteriler[ide][1]=soyad
+                if e_posta:
+                    musteriler[ide][2]=e_posta
+                if  telefon:
+                    musteriler[ide][3]= telefon
+                print(musteriler)
