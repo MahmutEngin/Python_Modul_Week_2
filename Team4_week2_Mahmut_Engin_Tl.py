@@ -50,44 +50,155 @@ for ogrenci in ogrenciler:
 print(dusuk)
 
 
+#Question 2: Film Library Management System Project
+# Film Kütüphanesi Yönetim Sistemi
 
-### Question 3: Customer Management System
-def menu():
-    print("""
-        1) Yemi musteri eklemek icin "1" e basiniz.
-        2) Musteri bilgilerini duzenlemek icin "2" e basiniz.
-        3) Musteri bil;gilerini silmek icin "3" e basiniz.
-        4) Musterileri listelemek icin "4" e basiniz.
-        4) Cikmak icin "q" e basiniz.
-        """) 
-musteriler={}
+koleksiyon = []
+
 while True:
-    menu()
-    secim = input("Seciminizi yapiniz: ")
-    if secim in  ["1","2","3","4","q"]:
-        if secim=="q":
-           break
-        if secim=="1": # musteri Ekleme
-           ide = input("Musteri idesini giriniz:")          
-           ad= input("Musteri adini giriniz:")
-           soyad= input("Musteri soyadini giriniz:")
-           e_posta = input("Musteri mail adresini giriniz:")
-           telefon = input("Musteri telefon numarasini giriniz:")
-           musteriler[ide]=[ad,soyad,e_posta,telefon]
-           print(musteriler)
-        if secim=="2":
-           ide = input("Musteri idesini giriniz:")    
-           if ide in musteriler:
-                ad = input("Yeni ad (degisiklik olmayacaksa enter'a basiniz) ")
-                soyad = input("Yeni soyad (degisiklik olmayacaksa enter'a basiniz) : ")
-                e_posta = input("Yeni e-posta (degisiklik olmayacaksa enter'a basiniz)  : ")
-                telefon = input("Yeni telefon (degisiklik olmayacaksa enter'a basiniz) : ")
-                if ad:
-                    musteriler[ide][0]=ad
-                if soyad:
-                    musteriler[ide][1]=soyad
-                if e_posta:
-                    musteriler[ide][2]=e_posta
-                if  telefon:
-                    musteriler[ide][3]= telefon
-                print(musteriler)
+    print("\n1. Film Ekle")
+    print("2. Film Düzenle")
+    print("3. Film Sil")
+    print("4. Koleksiyonu Görüntüle")
+    print("5. Çıkış")
+    secim = input("Seçiminizi yapın: ")
+
+    if secim == "1":
+        film_adı = input("Film adı: ")
+        yonetmen = input("Yönetmen: ")
+        yayin_yili = input("Yayın yılı: ")
+        tur = input("Tür: ")
+        koleksiyon.append({
+            "film_adı": film_adı,
+            "yonetmen": yonetmen,
+            "yayin_yili": yayin_yili,
+            "tur": tur
+        })
+        print(f"{film_adı} eklendi!")
+
+    elif secim == "2":
+        film_adı = input("Düzenlemek istediğiniz filmin adı: ")
+        for film in koleksiyon:
+            if film["film_adı"] == film_adı:
+                yeni_ad = input("Yeni film adı (boş bırakmak için Enter'a basın): ")
+                yeni_yonetmen = input("Yeni yönetmen (boş bırakmak için Enter'a basın): ")
+                yeni_yayin_yili = input("Yeni yayın yılı (boş bırakmak için Enter'a basın): ")
+                yeni_tur = input("Yeni tür (boş bırakmak için Enter'a basın): ")
+                
+                if yeni_ad:
+                    film["film_adı"] = yeni_ad
+                if yeni_yonetmen:
+                    film["yonetmen"] = yeni_yonetmen
+                if yeni_yayin_yili:
+                    film["yayin_yılı"] = yeni_yayin_yılı
+                if yeni_tur:
+                    film["tur"] = yeni_tur
+
+                print(f"{film_adı} düzenlendi!")
+                break
+        else:
+            print(f"{film_adı} bulunamadı.")
+
+    elif secim == "3":
+        film_adı = input("Silmek istediğiniz filmin adı: ")
+        for film in koleksiyon:
+            if film["film_adı"] == film_adı:
+                koleksiyon.remove(film)
+                print(f"{film_adı} silindi!")
+                break
+        else:
+            print(f"{film_adı} bulunamadı.")
+
+    elif secim == "4":
+        if not koleksiyon:
+            print("Koleksiyon boş.")
+        else:
+            for film in koleksiyon:
+                print(f"Film Adı: {film['film_adı']}, Yönetmen: {film['yonetmen']}, Yayın Yılı: {film['yayin_yılı']}, Tür: {film['tur']}")
+
+    elif secim == "5":
+        break
+    else:
+        print("Geçersiz seçim. Lütfen tekrar deneyin.")
+
+
+# Question 3: Customer Management System
+musteriler = {}
+
+while True:
+    print("\nMüşteri Yönetim Sistemi")
+    print("1. Yeni Müşteri Ekle")
+    print("2. Müşteri Bilgilerini Güncelle")
+    print("3. Müşteriyi Sil")
+    print("4. Tüm Müşterileri Listele")
+    print("5. Ödeme Yap")
+    print("6. Çıkış")
+
+    secim = input("Seçiminizi yapın: ")
+
+    if secim == '1':
+        id = input("Müşteri ID'sini girin: ")
+        if id in musteriler:
+            print("Bu ID zaten mevcut.")
+        else:
+            ad = input("Adı girin: ")
+            soyad = input("Soyadı girin: ")
+            email = input("E-posta adresini girin: ")
+            telefon = input("Telefon numarasını girin: ")
+            musteriler[id] = {
+                'ad': ad,
+                'soyad': soyad,
+                'email': email,
+                'telefon': telefon
+            }
+            print("Müşteri başarıyla eklendi.")
+
+    elif secim == '2':
+        id = input("Güncellemek istediğiniz müşteri ID'sini girin: ")
+        if id not in musteriler:
+            print("Müşteri bulunamadı.")
+        else:
+            print("Mevcut Bilgiler:", musteriler[id])
+            ad = input("Yeni adı girin (boş bırakmak için Enter'a basın): ")
+            soyad = input("Yeni soyadı girin (boş bırakmak için Enter'a basın): ")
+            email = input("Yeni e-posta adresini girin (boş bırakmak için Enter'a basın): ")
+            telefon = input("Yeni telefon numarasını girin (boş bırakmak için Enter'a basın): ")
+
+            if ad:
+                musteriler[id]['ad'] = ad
+            if soyad:
+                musteriler[id]['soyad'] = soyad
+            if email:
+                musteriler[id]['email'] = email
+            if telefon:
+                musteriler[id]['telefon'] = telefon
+            print("Müşteri bilgileri güncellendi.")
+
+    elif secim == '3':
+        id = input("Silmek istediğiniz müşteri ID'sini girin: ")
+        if id in musteriler:
+            del musteriler[id]
+            print("Müşteri silindi.")
+        else:
+            print("Müşteri bulunamadı.")
+
+    elif secim == '4':
+        if not musteriler:
+            print("Hiç müşteri bulunmamaktadır.")
+        else:
+            for id, bilgiler in musteriler.items():
+                print(f"ID: {id}, Ad: {bilgiler['ad']}, Soyad: {bilgiler['soyad']}, E-posta: {bilgiler['email']}, Telefon: {bilgiler['telefon']}")
+
+    elif secim == '5':
+        id = input("Ödeme yapmak istediğiniz müşteri ID'sini girin: ")
+        if id in musteriler:
+            print(f"{musteriler[id]['ad']} {musteriler[id]['soyad']} için ödeme işlemi gerçekleştirildi.")
+        else:
+            print("Müşteri bulunamadı.")
+
+    elif secim == '6':
+        print("Çıkış yapılıyor.")
+        break
+
+    else:
+        print("Geçersiz seçim, lütfen tekrar deneyin.")
